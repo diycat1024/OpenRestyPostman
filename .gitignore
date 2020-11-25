@@ -1,0 +1,12 @@
+.idea
+logs/
+uwsgi_temp/
+scgi_temp/
+proxy_temp/
+fastcgi_tem/
+image_test/
+client_body_temp
+lua/web/hudong.lua
+lua/web/shahu.lua
+!lua/web/index.lua
+!lua/web/postman.lua

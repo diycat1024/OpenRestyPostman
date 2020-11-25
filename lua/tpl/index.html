@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PostMan</title>
+</head>
+<body>
+<div style="text-align: center; float: left">
+    <div><h1>PostMain</h1></div>
+    <div>
+        <form action="/postman/index" method="post" name="postman">
+            <table style="width: 500px;height: 200px">
+                <tr>
+                    <td>请求地址：</td>
+                    <td><input id="reqUrl" name="reqUrl" type="text" style="width: 300px;height: 35px;"  value="{*reqUrl*}"/></td>
+                </tr>
+                <tr>
+                    <td>请求body：</td>
+                    <td><textarea id="reqBody" name="reqBody" type="text"  style="width: 300px;height: 55px">{*reqBody*}</textarea></td>
+                </tr>
+                <tr>
+                    <td>返回值：</td>
+                    <td><textarea id="resp" name="resp" disabled style="width: 300px;height: 105px">{*resp*}</textarea></td>
+                </tr>
+            </table>
+            <input id="btn" type="submit" value="提交"/>
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
