@@ -1,7 +1,8 @@
 ## OpenRestyPostMan
 ### 项目概述
 这是一个用openresty制作的可以用来发送post请求的工具。后面我会把postman的功能添加进来。
-##　目录说明
+
+## 目录说明
 ```
 /
 ├── conf/nginx.conf 配置文件
