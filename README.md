@@ -40,5 +40,6 @@ reload.sh
 
 ### 项目依赖
  [lua-resty.http](https://github.com/ledgetech/lua-resty-http)
+ 
  [lua-resty.template](https://github.com/bungle/lua-resty-template)
  
