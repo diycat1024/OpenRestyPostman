@@ -21,7 +21,9 @@ function postman.httpPost(req_uri, req_body)
         return body
     end
     ngx.status = res.status
+    ngx.say("<td>")
     ngx.say(res.body)
+    ngx.say("</td>")
 
     httpc:close()
     return res.body

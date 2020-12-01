@@ -3,6 +3,8 @@
 --- Created by dell.
 --- DateTime: 2020/11/24 下午5:49
 
+local lfs1 = require("lfs")
+local postman = require("cus.postman")
 
 util = {}
 
@@ -18,7 +20,7 @@ end
 --通过解析main.go来获取算法列表
 function util.getPsdList(filename)
     local file = io.open(filename, "r")
-    local psdlist = {}
+    local psd_list = {}
     for line in io.lines(filename) do
 
         if  #line <= 0 or string.find(line, "SetMember") == nil then
@@ -39,13 +41,49 @@ function util.getPsdList(filename)
         if  #rt <= 0 or #rt2[1] == 0 then
             goto continue
         end
-        table.insert(psdlist, rt2)
+        table.insert(psd_list, rt2)
         ::continue::
     end
     file:close()
-    return psdlist
+    return psd_list
 end
 
+function util.getPsgListByImgDir(img_dir)
+    local psd_list = {}
+    for file in lfs1.dir(img_dir)do
+        if #file == 0 then
+            goto continue
+        end
+        local psdname = string.split(file,'.')
+        if #psdname == 0 or #psdname[1] == 0 then
+            goto continue
+        end
+        table.insert(psd_list, psdname[1])
+        ::continue::
+    end
+    return psd_list
+end
+
+function util.reqByPsdList(psd_list, api_prefix, img_prefix)
+    ngx.say("<table>")
+    ngx.say("<tr><td>reqUrl:</td><td>reqBody:</td><td>resPonse:</td></tr>")
+    for k, v in pairs(psd_list) do
+        local reqUrl = api_prefix .. v
+        local reqBody = '{"logId":"sfsdfgdsfghhgfg","imgUrl":"' .. img_prefix .. v .. '.jpg"}'
+        ngx.say("<tr>")
+        ngx.say("<td>")
+        ngx.say(reqUrl)
+        ngx.say("</td>")
+        ngx.say("<td>")
+        ngx.say(reqBody)
+        ngx.say("</td>")
+
+        co = coroutine.create(postman.httpPost)
+        coroutine.resume(co, reqUrl, reqBody)
+        ngx.say("<tr>")
+    end
+    ngx.say("</table>")
+end
 
 --table 长度计算
 function util.table_leng(t)
